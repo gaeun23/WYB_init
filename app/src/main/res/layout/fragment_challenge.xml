@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/challenge_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.ChallengeFragment">
+
+        <TextView
+            android:id="@+id/main_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/spoqa_bold"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.03"
+            android:text="가니"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_heavy"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.03"
+            android:text="@string/main_bottle_title"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/main_user_name"
+            app:layout_constraintStart_toEndOf="@id/main_user_name"
+            app:layout_constraintTop_toTopOf="@id/main_user_name" />
+
+        <ImageButton
+            android:id="@+id/main_btn_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/main_btn_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_alarm"
+            app:layout_constraintEnd_toStartOf="@id/main_btn_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/challenge_content_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_user_name"
+            app:tabBackground="@drawable/selector_main_tab_menu"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabPaddingEnd="11dp"
+            app:tabPaddingStart="11dp"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextAppearance="@style/main_tab_text"
+            app:tabTextColor="@color/gray_3" />
+
+        <ImageButton
+            android:id="@+id/main_btn_bottle_world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="@id/challenge_content_tab"
+            app:layout_constraintStart_toEndOf="@id/challenge_content_tab"
+            app:layout_constraintTop_toTopOf="@id/challenge_content_tab"
+            tools:ignore="ContentDescription" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/main_content_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/challenge_content_tab" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
