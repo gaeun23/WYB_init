@@ -5,19 +5,23 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.wyb.wyb_android.R
+import com.wyb.wyb_android.data.local.Comfort
 import com.wyb.wyb_android.databinding.ItemChallengeContainerBinding
 
-class ChallengeAdapter(val viewModel: ChallengeViewModel) :
+class ChallengeAdapter(
+    private val viewModel: ChallengeViewModel,
+    val itemList: MutableList<Comfort>
+) :
     RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>() {
-
-    private val dummyList = arrayListOf("나", "박", "가")
 
     class ChallengeViewHolder(
         private val binding: ItemChallengeContainerBinding,
-        private val challengeViewModel: ChallengeViewModel
+        private val viewModel: ChallengeViewModel
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind() {
-
+        fun onBind(item: Comfort) {
+            binding.data = item
+            binding.rvChallengeDiscomfort.adapter =
+                ChallengeDateAdapter(viewModel, item.innerList)
         }
     }
 
@@ -33,9 +37,8 @@ class ChallengeAdapter(val viewModel: ChallengeViewModel) :
     }
 
     override fun onBindViewHolder(holder: ChallengeViewHolder, position: Int) {
-        dummyList[position]
+        holder.onBind(itemList[position])
     }
 
-    override fun getItemCount(): Int = 3
-
+    override fun getItemCount(): Int = itemList.size
 }

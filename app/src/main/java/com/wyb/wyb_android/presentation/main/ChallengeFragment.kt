@@ -10,6 +10,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wyb.wyb_android.R
 import com.wyb.wyb_android.base.BindingFragment
+import com.wyb.wyb_android.data.local.Challenge
+import com.wyb.wyb_android.data.local.Comfort
 import com.wyb.wyb_android.databinding.FragmentChallengeBinding
 
 class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fragment_challenge) {
@@ -28,13 +30,43 @@ class ChallengeFragment : BindingFragment<FragmentChallengeBinding>(R.layout.fra
     }
 
     private fun setChallengeVPAdapter() {
-        binding.mainContentVp.adapter = ChallengeAdapter(challengeViewModel)
+
+        val itemList = mutableListOf(
+            Comfort(
+                "11.06-12.3",
+                "편리함1",
+                mutableListOf(
+                    Challenge("불편함1", "06", isToday = false, isFuture = false),
+                    Challenge("불편함1", "07", isToday = false, isFuture = false),
+                    Challenge("불편함1", "08", isToday = false, isFuture = false),
+                    Challenge("불편함1", "09", isToday = false, isFuture = false),
+                    Challenge("불편함1", "10", isToday = true, isFuture = false),
+                    Challenge("불편함1", "11", isToday = false, isFuture = true),
+                    Challenge("불편함1", "12", isToday = false, isFuture = true)
+                )
+            ),
+            Comfort(
+                "123",
+                "편리함12",
+                mutableListOf(
+
+                )
+            ), Comfort(
+                "456",
+                "편리함13",
+                mutableListOf(
+
+                )
+            )
+        )
+
+        binding.mainContentVp.adapter = ChallengeAdapter(challengeViewModel, itemList)
         binding.mainContentVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.mainContentVp.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
     }
 
     private fun setTabMediator() {
-        TabLayoutMediator(binding.challengeContentTab, binding.mainContentVp) { tab, position ->
+        TabLayoutMediator(binding.challengeContentTab, binding.mainContentVp) { tab, _ ->
             tab.text = "나"
         }.attach()
     }

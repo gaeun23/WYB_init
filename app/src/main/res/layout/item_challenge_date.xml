@@ -3,6 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.wyb.wyb_android.data.local.Challenge" />
+
+        <variable
+            name="viewModel"
+            type="com.wyb.wyb_android.presentation.main.ChallengeViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_challenge_watert"
+                android:id="@+id/layout_challenge_water"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -28,8 +41,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/ic_water_orange"
-                    android:visibility="visible"
+                    android:clickable="@{data.future == true? false : true}"
+                    android:src="@{data.future == true? @drawable/ic_water_gray : @drawable/ic_water_orange}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
@@ -42,10 +55,9 @@
                     android:fontFamily="@font/spoqa_bold"
                     android:includeFontPadding="false"
                     android:letterSpacing="-0.03"
-                    android:text="30"
-                    android:textColor="@color/orange"
+                    android:text="@{data.date}"
+                    android:textColor="@{data.future == true? @color/gray_3 : @color/gray_1}"
                     android:textSize="13dp"
-                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="@id/img_challenge_water_orange"
                     app:layout_constraintEnd_toEndOf="@id/img_challenge_water_orange"
                     app:layout_constraintStart_toStartOf="@id/img_challenge_water_orange"
@@ -57,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:background="@drawable/selector_challenge_today"
+                android:background="@{data.today == true? @drawable/selector_challenge_today : null}"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="8dp">
 
@@ -69,8 +81,8 @@
                     android:fontFamily="@font/spoqa_medium"
                     android:includeFontPadding="false"
                     android:letterSpacing="-0.03"
-                    android:text="종이컵홀더 안 쓰기종이컵홀더 안 쓰기"
-                    android:textColor="@color/orange"
+                    android:text="@{data.disComfort}"
+                    android:textColor="@{data.future == true? @color/gray_2 : @color/gray_4}"
                     android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/btn_challenge_edit"
@@ -83,7 +95,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:onClick="@{()->viewModel.setIsEdit(true)}"
                     android:src="@drawable/ic_edit_gray"
+                    android:visibility="@{data.future == true ? View.INVISIBLE : 0}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_challenge_discomfort"
